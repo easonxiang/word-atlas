@@ -24,6 +24,8 @@
 
 [产品预览](#产品预览) · [学习方式](#学习方式) · [本地运行](#本地运行) · [开放数据](#开放数据) · [参与贡献](#参与贡献)
 
+> **移动端开发版**：此 fork 正在基于 Capacitor 增加 iOS 与 Android 应用壳。构建、资源下载和本地数据行为见 [移动端文档](docs/mobile.md)。
+
 ## 产品预览
 
 ### 一本可以听、可以练的单词图鉴
@@ -102,13 +104,17 @@
 需要 **Node.js 20+** 和 npm。仓库含完整图片与录音，首次下载可能较久。
 
 ```bash
-git clone --depth 1 https://github.com/designfuchen/word-atlas.git
+git clone --depth 1 https://github.com/easonxiang/word-atlas.git
 cd word-atlas
 npm ci
 npm run dev
 ```
 
 打开 **http://localhost:5188**。
+
+### 构建 iOS / Android 应用
+
+完成 `npm ci` 后运行 `npm run build:mobile`，再用 Xcode 或 Android Studio 打开对应原生项目。详细说明见[移动端文档](docs/mobile.md)。应用内进度保存在本机；从浏览器切换到 App 时，需要先从浏览器导出备份，再在 App 中导入。
 
 ```bash
 npm test             # 单元测试
