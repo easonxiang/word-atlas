@@ -5,6 +5,7 @@ import { isMastered } from "../store/srs";
 import { dayKey, exportBackup, importBackup, resetProgress, store, useStore, type Settings } from "../store/store";
 import { toast } from "../ui/Toast";
 import { streakOf } from "./Today";
+import { saveBackupFile } from "../lib/backupFile";
 
 export function Me({ privateAvailable }: { privateAvailable: boolean }) {
   const atlas = useAtlas();
@@ -33,13 +34,12 @@ export function Me({ privateAvailable }: { privateAvailable: boolean }) {
   }, [progress]);
 
   const set = (patch: Partial<Settings>) => store.settings(patch);
-  const download = () => {
-    const blob = new Blob([exportBackup()], { type: "application/json" });
-    const a = document.createElement("a");
-    a.href = URL.createObjectURL(blob);
-    a.download = `word-atlas-backup-${dayKey()}.json`;
-    a.click();
-    setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+  const download = async () => {
+    try {
+      await saveBackupFile(`word-atlas-backup-${dayKey()}.json`, exportBackup());
+    } catch {
+      toast("无法导出备份，请稍后重试。", "warn");
+    }
   };
   const restore = async (f: File) => {
     if (f.size > 30 * 1024 * 1024) return toast("文件太大，不像是学习备份。", "warn");

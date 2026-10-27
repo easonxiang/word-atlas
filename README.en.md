@@ -24,6 +24,8 @@ Word Atlas is an illustrated IELTS vocabulary app for Chinese-speaking learners.
 
 [Preview](#preview) · [Learning loop](#learning-loop) · [Quick start](#quick-start) · [Open dataset](#open-dataset) · [Contributing](#contributing)
 
+> **Mobile development fork:** this fork is adding iOS and Android app shells with Capacitor. See the [mobile guide](docs/mobile.md) for builds, media delivery, local data behavior, and the planned sync path.
+
 ## Preview
 
 ### A vocabulary atlas you can listen to and practise with
@@ -74,11 +76,15 @@ Listen to a sample: **abandon** — [UK](public/atlas/audio/uk/abandon.mp3) · [
 Requires **Node.js 20+** and npm. This repository includes the full image and audio collection, so the initial download can take time.
 
 ```bash
-git clone --depth 1 https://github.com/designfuchen/word-atlas.git
+git clone --depth 1 https://github.com/easonxiang/word-atlas.git
 cd word-atlas
 npm ci
 npm run dev
 ```
+
+### Build the iOS / Android app
+
+After `npm ci`, run `npm run build:mobile`, then open the native project in Xcode or Android Studio. See the [mobile guide](docs/mobile.md). Progress stays in app-local storage; to move existing browser progress into the app, export a backup in the browser and import it in the app.
 
 Open **http://localhost:5188**.
 
